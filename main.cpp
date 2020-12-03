@@ -4,12 +4,33 @@
 #include <math.h>
 using namespace std;
 
+
+int menuMahasiswa(){
+    system("cls");
+    int input;
+    cout<<"Menu Mahasiswa"<<endl;
+    cout<<"======================"<<endl;
+    cout<<"1. Lihat daftar mahasiswa"<<endl;
+    cout<<"2. Tambah data mahasiswa"<<endl;
+    cout<<"3. Ubah data mahasiswa"<<endl;
+    cout<<"4. Hapus data mahasiswa"<<endl;
+    cout<<"5. Kembali ke menu awal"<<endl;
+    cout<<"======================"<<endl;
+    cout<<"Pilih [1-5] : ";
+    cin>>input;
+
+    return input;
+}
+
 int main()
 {
+
 
     const int jumlahArray = 40;
     int jmlAnggota, loop;
     srand(time(0));
+
+
     string mahasiswa[jumlahArray] = {
         "Naeli Fitria Rokhamawati",
         "Deva Apriana",
@@ -59,20 +80,58 @@ int main()
     cout << "                                        Masukkan pilihan Anda: ";
     cin >> pilihan;
 
-    int no = 1;
+    int noKelompok = 1;
 
+
+    int pilMenu;
+    char pengulanganMenu;
+
+    // representasi angka 1-5
+    enum crud{READ = 1, CREATE, UPDATE, DELETE, FINISH};
     switch(pilihan){
+
     case 1:
-        cout<<endl;
-        cout<<"                                       Daftar Mahasiswa"<<endl;
+
+           pilMenu = menuMahasiswa();
+           while(pilMenu != FINISH){
+
+            switch(pilMenu){
+            case READ:
+                cout<<"Daftar Mahasiswa"<<endl;
+                break;
+            case CREATE:
+                cout<<"Tambah data mahasiswa"<<endl;
+                break;
+            case UPDATE:
+                cout<<"Ubah data mahasiswa"<<endl;
+                break;
+            case DELETE:
+                cout<<"Hapus data Mahasiswa"<<endl;
+                break;
+            default:
+                cout<<"Pilihan tidak sesuai"<<endl;
+                break;
+             }
 
 
-        for(int i= 0; i < jumlahArray; i++){
-            cout<<no<<". "<<mahasiswa[i]<<"\n";
-            no++;
-        }
+           // untuk mengulang eksekusi program
+           label_continue:
 
-        break;
+           cout<<"Lanjutkan ? (y/n)";
+           cin>>pengulanganMenu;
+
+           if(pengulanganMenu=='y' | pengulanganMenu=='Y'){
+                pilMenu = menuMahasiswa();
+           }else if(pengulanganMenu=='n' | pengulanganMenu=='N'){
+                // break while
+                break;
+           }else{
+                goto label_continue;
+            }
+           }
+            // break case 1
+            break;
+
     case 2:
 
         cout<<"                                        Mau berapa anggota per kelompok : ";
@@ -97,7 +156,7 @@ int main()
 
 
 
-        cout<<"Kelompok "<<no<<"\n";
+        cout<<"Kelompok "<<noKelompok<<"\n";
 
         loop = 1;
         for(int i = 0; i < jumlahArray; i++){
@@ -105,15 +164,14 @@ int main()
 
             cout<<mahasiswa[i]<<endl;
 
-
-            if(i == jumlahArray-1){
+            if(loop == jumlahArray){
                 break;
             }
 
             if(loop % jmlAnggota == 0){
-                no++;
+                noKelompok++;
                 cout<<endl;
-                cout<<"Kelompok "<<no<<endl;
+                cout<<"Kelompok "<<noKelompok<<endl;
             }
             //if(i == jmlAnggota-1){
               //   no++;
@@ -127,6 +185,7 @@ int main()
         cout<<"pilihan yang anda masukkan tidak ada";
         break;
     }
+
 
 
     return 0;
