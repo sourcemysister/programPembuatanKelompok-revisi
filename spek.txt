@@ -1,0 +1,5 @@
+aplikasi Kelompok Belajar
+fitur:
+1.Daftar Mahasiswa 
+2.Pembuatan kelompok
+3.Jadwal kuliah (bisa edit)
